@@ -1,0 +1,4 @@
+config.json
+CLAUDE.md
+__pycache__/
+*.pyc
