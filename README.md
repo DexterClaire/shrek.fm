@@ -17,7 +17,7 @@ The script polls Last.fm every 60 seconds. If you're actively scrobbling a track
 ### 1. Clone the repo
 
 \`\`\`bash
-git clone https://github.com/yourusername/shrek.fm.git
+git clone https://github.com/DexterClaire/shrek.fm.git
 cd shrek.fm
 \`\`\`
 
