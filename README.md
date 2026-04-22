@@ -16,48 +16,34 @@ The script polls Last.fm every 60 seconds. If you're actively scrobbling a track
 
 ### 1. Clone the repo
 
-\`\`\`bash
+```bash
 git clone https://github.com/DexterClaire/shrek.fm.git
 cd shrek.fm
-\`\`\`
+```
 
 ### 2. Install dependencies
 
-\`\`\`bash
+```bash
 pip install -r requirements.txt
-\`\`\`
+```
 
-### 3. Get your Last.fm API key
+### 3. Configure
 
-1. Go to [last.fm/api/account/create](https://www.last.fm/api/account/create)
-2. Fill in the form (app name, description — anything works)
-3. Copy your **API Key**
+Copy the example config and set your Last.fm username:
 
-### 4. Configure
-
-Copy the example config and fill in your credentials:
-
-\`\`\`bash
+```bash
 cp config.example.json config.json
-\`\`\`
+```
 
-Edit `config.json`:
+Edit `config.json` and replace `your_lastfm_username` with your Last.fm username. The API key and Discord client ID are pre-filled and ready to go.
 
-\`\`\`json
-{
-  "lastfm_api_key": "your_lastfm_api_key",
-  "lastfm_username": "your_lastfm_username",
-  "discord_client_id": "1495842422133882982"
-}
-\`\`\`
+> If you'd prefer to use your own Last.fm API key, you can create one at [last.fm/api/account/create](https://www.last.fm/api/account/create).
 
-> ⚠️ `config.json` is listed in `.gitignore` and will not be committed. Never share your API keys publicly.
+### 4. Run it
 
-### 5. Run it
-
-\`\`\`bash
+```bash
 python shrek_fm.py
-\`\`\`
+```
 
 Keep the script running in the background while you listen. Your Discord profile will update automatically.
 
