@@ -10,6 +10,7 @@ with open("config.json", "r") as f:
 LASTFM_API_KEY = config["lastfm_api_key"]
 LASTFM_USER = config["lastfm_username"]
 DISCORD_CLIENT_ID = config["discord_client_id"]
+POLL_INTERVAL = config.get("poll_interval", 60)
 
 def get_now_playing():
     try:
@@ -71,7 +72,7 @@ def main():
                 presence.clear()
                 current_track = None
 
-        time.sleep(60)
+        time.sleep(POLL_INTERVAL)
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,6 @@
 {
   "lastfm_api_key": "6b1e694e99d768a033c49bc6fce53195",
   "lastfm_username": "your_lastfm_username",
-  "discord_client_id": "1495842422133882982"
+  "discord_client_id": "1495842422133882982",
+  "poll_interval": 60
 }
