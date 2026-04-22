@@ -37,6 +37,8 @@ cp config.example.json config.json
 
 Edit `config.json` and replace `your_lastfm_username` with your Last.fm username. The API key and Discord client ID are pre-filled and ready to go.
 
+You can also adjust `poll_interval` (in seconds) to control how often the script checks Last.fm. It defaults to `60`.
+
 > If you'd prefer to use your own Last.fm API key, you can create one at [last.fm/api/account/create](https://www.last.fm/api/account/create).
 
 ### 4. Run it
