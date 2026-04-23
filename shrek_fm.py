@@ -58,8 +58,8 @@ def main():
             if track_key != current_track:
                 print(f"[Now Playing] {track['title']} — {track['artist']}")
                 presence.update(
-                    details=track["title"],
-                    state=f"{track['artist']}",
+                    details=track["title"].ljust(2),
+                    state=track["artist"].ljust(2),
                     large_image="shrek",
                     large_text=track["album"] or "Unknown Album",
                     start=int(time.time())
