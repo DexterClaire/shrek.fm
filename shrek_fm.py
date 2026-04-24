@@ -43,34 +43,46 @@ def get_now_playing():
 
 def main():
     print("Starting Last.fm → Discord Rich Presence...")
-    
-    presence = Presence(DISCORD_CLIENT_ID)
-    presence.connect()
-    print("Connected to Discord.")
 
+    presence = None
     current_track = None
 
     while True:
+        if presence is None:
+            try:
+                presence = Presence(DISCORD_CLIENT_ID)
+                presence.connect()
+                print("Connected to Discord.")
+            except Exception:
+                print("[Discord] Not available, retrying...")
+                presence = None
+                time.sleep(POLL_INTERVAL)
+                continue
+
         track = get_now_playing()
 
-        if track:
-            track_key = (track["title"], track["artist"])
-            if track_key != current_track:
-                print(f"[Now Playing] {track['title']} — {track['artist']}")
-                presence.update(
-                    details=track["title"].ljust(2),
-                    state=track["artist"].ljust(2),
-                    large_image="shrek",
-                    large_text=track["album"] or "Unknown Album",
-                    start=int(time.time())
-                )
-                current_track = track_key
-        else:
-            # Nothing playing — clear presence if we had something before
-            if current_track is not None:
-                print("[Stopped] Clearing presence.")
-                presence.clear()
-                current_track = None
+        try:
+            if track:
+                track_key = (track["title"], track["artist"])
+                if track_key != current_track:
+                    print(f"[Now Playing] {track['title']} — {track['artist']}")
+                    presence.update(
+                        details=track["title"].ljust(2),
+                        state=track["artist"].ljust(2),
+                        large_image="shrek",
+                        large_text=track["album"] or "Unknown Album",
+                        start=int(time.time())
+                    )
+                    current_track = track_key
+            else:
+                if current_track is not None:
+                    print("[Stopped] Clearing presence.")
+                    presence.clear()
+                    current_track = None
+        except Exception as e:
+            print(f"[Discord] Lost connection: {e}")
+            presence = None
+            current_track = None
 
         time.sleep(POLL_INTERVAL)
 
