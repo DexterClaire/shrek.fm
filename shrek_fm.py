@@ -30,10 +30,13 @@ def get_now_playing():
 
         # Only return if actively now playing
         if "@attr" in track and track["@attr"].get("nowplaying") == "true":
+            images = {img["size"]: img["#text"] for img in track.get("image", [])}
+            album_art = images.get("extralarge") or images.get("large") or None
             return {
                 "title": track["name"],
                 "artist": track["artist"]["#text"],
-                "album": track["album"]["#text"]
+                "album": track["album"]["#text"],
+                "album_art": album_art if album_art else None
             }
         return None
 
@@ -69,7 +72,7 @@ def main():
                     presence.update(
                         details=track["title"].ljust(2),
                         state=track["artist"].ljust(2),
-                        large_image="shrek",
+                        large_image=track["album_art"] or "shrek",
                         large_text=track["album"] or "Unknown Album",
                         start=int(time.time())
                     )
