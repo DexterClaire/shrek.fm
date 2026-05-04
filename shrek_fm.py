@@ -26,6 +26,9 @@ def get_now_playing():
             timeout=10
         )
         data = response.json()
+        if "error" in data:
+            print(f"[Last.fm] API error {data['error']}: {data.get('message', 'unknown')}")
+            return None
         track = data["recenttracks"]["track"][0]
 
         # Only return if actively now playing
