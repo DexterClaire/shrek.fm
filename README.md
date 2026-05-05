@@ -39,6 +39,8 @@ Edit `config.json` and replace `your_lastfm_username` with your Last.fm username
 
 You can also adjust `poll_interval` (in seconds) to control how often the script checks Last.fm. It defaults to `60`.
 
+Set `notifications` to `false` to disable Windows toast notifications when a new track starts. Defaults to `true`.
+
 > If you'd prefer to use your own Last.fm API key, you can create one at [last.fm/api/account/create](https://www.last.fm/api/account/create).
 
 ### 4. Run it
@@ -59,6 +61,7 @@ Keep the script running in the background while you listen. Your Discord profile
 
 - [pypresence](https://github.com/qwertyquerty/pypresence)
 - [requests](https://docs.python-requests.org)
+- [winotify](https://github.com/versa-syahptr/winotify)
 
 ## License
 

@@ -2,6 +2,7 @@ import requests
 import time
 import json
 from pypresence import Presence
+from winotify import Notification
 
 # Load config
 with open("config.json", "r") as f:
@@ -11,6 +12,7 @@ LASTFM_API_KEY = config["lastfm_api_key"]
 LASTFM_USER = config["lastfm_username"]
 DISCORD_CLIENT_ID = config["discord_client_id"]
 POLL_INTERVAL = config.get("poll_interval", 60)
+NOTIFICATIONS = config.get("notifications", True)
 
 def get_now_playing():
     try:
@@ -72,6 +74,13 @@ def main():
                 track_key = (track["title"], track["artist"])
                 if track_key != current_track:
                     print(f"[Now Playing] {track['title']} — {track['artist']}")
+                    if NOTIFICATIONS:
+                        Notification(
+                            app_id="Shrek.fm",
+                            title="Now Playing",
+                            msg=f"{track['title']} — {track['artist']}",
+                            duration="short"
+                        ).show()
                     presence.update(
                         details=track["title"].ljust(2),
                         state=track["artist"].ljust(2),
